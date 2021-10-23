@@ -3,5 +3,5 @@ from django.http import HttpResponse
 
 
 def home(request):
-	return HttpResponse("Core core.py")
+	return render(request, 'core_temp/core.html')
 # Create your views here.

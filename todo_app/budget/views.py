@@ -3,5 +3,5 @@ from django.http import HttpResponse
 
 
 def home(request):
-	return HttpResponse("Budget Budget.py")
+	return render(request, 'budget_temp/budget.html')
 # Create your views here.
