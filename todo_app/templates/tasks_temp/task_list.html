@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "bootstrap.html" %}
+    {%load static %}
+  </head>
+  {% include "navigation.html" %}
+    <section class="vh-100" style="background-color: #eee;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+              <div class="card-body p-4">
+               <h4 class="text-center my-3 pb-3">Tasks Page</h4>               
+
+
+              <div class="col-8">
+                <a href="{% url 'task-create' %}" type="button" class="btn btn-primary btn-sm"> Add Task </a>
+              </div>
+              <br>
+              <div class="col-8">
+                <a href="{% url 'task-category' %}" type="button" class="btn btn-primary btn-sm"> Add Category </a>
+              </div>
+              <br>
+              <div class="col-8">
+                <a href="{% url 'category-delete'%}" type="button" class="btn btn-primary btn-sm"> Delete Category</a>
+              </div>
+              <br>
+              <table class="table mb-4">
+
+                <thead>
+                  <tr>
+                    <th scope="col"> Category </th>
+                    <th scope="col"> Task </th>
+                    <th scope="col"> Completed </th>
+                    <th scope="col"> Actions</th>
+                  </tr> 
+                </thead>
+                <tbody>
+                {% for task in tasks %}
+                <tr>
+                  <td>{{ task.category }}</td>
+                  <td>{{ task.description }}</td>
+                  <td>{{ task.complete }} </td>
+		          <td><a href="{% url 'task-update' task.id %}" type="button" class="btn btn-primary btn-sm"> Edit</a></td>
+                  <br>
+                  <td><a href="{% url 'task-delete' task.id %}" type="button" class="btn btn-primary btn-sm"> Delete Task</a></td>
+                </tr> 
+                {% empty %}
+                  <tr>
+                    <td>
+                      No items
+                    </td>
+                  </tr>
+                {% endfor %}  
+                </tbody>
+              </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</html>
