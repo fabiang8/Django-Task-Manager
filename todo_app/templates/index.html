@@ -4,15 +4,39 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	{% include "bootstrap.html" %}
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"> </script>
+
+           
+		<title>Document</title>
+		{% include "bootstrap.html" %}
+		{% include "navigation.html" %}
+
 </head>
-
 <body>
-	{% include "navigation.html" %}
-	<h1>Dashboard</h1>
+    <section class="vh-150" style="background-color: #eee;">
+      <div class="container">
+        <div class="row">
+         <div class="col-lg jumbotron text-center">
+					<h1>Tasks</h1>
+				 	<div class="ct-chart ct-perfect-fourth", id="tasks_pie"></div>
+				 	<td><a href="{% url 'tasks' %}" type="button" class="btn btn-primary btn-lrg"> Tasks </a></td>
+          <br>
+					</div>
+					<div class="col-lg jumbotron text-center">
+						<h1>Budget</h1>
+						<td><a href="{% url 'budgets' %}" type="button" class="btn btn-primary btn-lrg"> Budget </a></td>
+						</div>
+						<script>
+								new Chartist.Pie('#tasks_pie', {
+									series: [{{ num_list.0.num_comp|safe }},{{ num_list.1.num_comp|safe }}],
+									labels: ['Completed', 'Pending']
+								});
 
-	
+						</script>
 
-</body>	
-</html>
+					</div>
+				</div>	
+		</section>					
+	</body>		
+	</html>

@@ -4,10 +4,24 @@ from django.http import HttpResponse
 from core.forms import JoinForm
 from core.forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
+#from.views import BudgetList,TaskList
+from django.db.models import Count, Case, When
+from tasks.models import Task
+from django.template.response import TemplateResponse
 
 @login_required(login_url='/login/')
 def home(request):
-	return render(request, 'index.html')
+
+    num_comp = Task.objects.filter(user=request.user).aggregate(num_comp=Count(Case(When(complete=True,then=1))))
+    num_fail = Task.objects.filter(user=request.user).aggregate(num_comp=Count(Case(When(complete=False,then=1))))
+    num_list = []
+    num_list.append(num_comp)
+    num_list.append(num_fail)
+    context = {
+        "num_list": [num_comp,num_fail]
+    }
+    return render(request, 'index.html', context)
+
 # Create your views here.
 def index(request):
 	return render(request, 'core_temp/index.html')

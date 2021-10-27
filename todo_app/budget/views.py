@@ -27,12 +27,16 @@ class BudgetList(ListView):
 		context = super().get_context_data(**kwargs)
 		qs = kwargs.pop('object_list', self.object_list)
 		actual = qs.filter(user=self.request.user).aggregate(actual=Sum('actual'))
+		#actual_list = qs.filter(user=self.request.user).value('actual')
+		#projected_list = qs.filter(user=self.request.user).value('projected')
 		projected = qs.filter(user=self.request.user).aggregate(projected=Sum('projected'))
 		if projected['projected']:
 			actual = float(projected['projected']) - float(actual['actual'])
 		#balance = int(balance)
 		context['budgets'] = context['budgets'].filter(user=self.request.user)
 		context['actual'] = actual
+		#context['projected_list'] = projected_list
+		#context['actual_list'] = actual_list
 		return context
 	
 #	def get_total(self):
