@@ -20,6 +20,7 @@ class TaskList(ListView):
 	model = Task
 	template_name = "tasks_temp/task_list.html"
 	context_object_name = 'tasks'
+	
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -34,7 +35,7 @@ class TaskDetail(DetailView):
 
 class TaskCreate(CreateView):
 	model = Task
-	fields = ['description', 'category']
+	fields = ['description', 'category','complete']
 	template_name = "tasks_temp/task_create.html"
 	success_url = reverse_lazy('tasks')
 	#success_url = ''
@@ -55,12 +56,12 @@ class TaskCreateCategory(CreateView):
 class DeleteCategory(DeleteView):
 	model = TaskCategory
 	context_object_name = "category"
-	template_name = "tasks_temp/task_confirm_delete.html"
+	template_name = "tasks_temp/task_delete_category.html"
 	success_url = reverse_lazy('tasks')
 
 class TaskUpdate(UpdateView):
 	model = Task
-	fields = ['description', 'category']
+	fields = ['description', 'category', 'complete']
 	template_name = "tasks_temp/task_create.html"
 	success_url = reverse_lazy('tasks')
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "bootstrap.html" %}
+    {% load static %}
+  </head>
+  {% include "navigation.html" %}
+    <section class="vh-100" style="background-color: #eee;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+              <div class="card-body p-4">
+               <h4 class="text-center my-3 pb-3">Budget Page</h4>               
+                <div class="col-8">
+                <a href="{% url 'create-budget' %}" type="button" class="btn btn-primary btn-sm"> Add Budget Item </a>
+                </div>
+                <br>
+
+                <table class="table mb-4">
+
+                <thead>
+                  <tr>
+                    <th scope="col"> Category </th>
+                    <th scope="col"> Description </th>
+                    <th scope="col"> Projected </th>
+                    <th scope="col"> Actual </th>
+                  </tr> 
+                </thead>
+                <tbody>
+                {% for budget in budgets %}
+                <tr>
+                  <td>{{ budget.category }}</td>
+                  <td>{{ budget.description }}</td>
+                  <td>{{ budget.projected }} </td>
+                  <td>{{ budget.actual }} </td>
+                  <td><a href="{% url 'update-budget' budget.id %}" type="button" class="btn btn-primary btn-sm"> Edit </a></td>
+                  <br>
+                  <td><a href="{% url 'delete-budget' budget.id %}" type="button" class="btn btn-primary btn-sm"> Delete </a></td>
+                  <br>
+
+                </tr> 
+                {% empty %}
+                  <tr>
+                    <td>
+                      No items
+                    </td>
+                  </tr>
+                {% endfor %}
+                  <tr>  
+                      {% if actual > 0 %}
+                      
+                      <td> Budget Surplus: {{actual}} </td>
+                      
+                      {% elif actual < 0 %}
+
+                      <td> Budget Deficit {{actual}} </td>
+
+                      {% else %}  
+
+                       <td> No Budget </td>
+                      {% endif %}
+
+                  </tr>
+
+                </tbody>
+              
+              </table>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</html>
