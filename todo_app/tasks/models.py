@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class TaskCategory(models.Model):
-	category = models.CharField(max_length=128, null=True)
+	category = models.CharField(max_length=128, null=True,unique=True)
 	def __str__(self):
 		return self.category
 

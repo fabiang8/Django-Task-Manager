@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<a rel="{% url 'budgets' %}"> </a>
 	{% load static %}
-	{% include "bootstrap.html" %}
+	{% include "bootstrap.html" %}	
+
+</head>
+<body>	
 	<meta charset="utf-8">
 	<title> Delete Item Confirmation </title>
 	<section class="vh-100" style="background-color: #blue;">
@@ -12,18 +15,20 @@
           <div class="col col-lg-9 col-xl-7">
             <div class="card rounded-3">
               <div class="card-body p-4">
-				</head>
-				<a rel="{% url 'budgets' %}"> </a>	
-				<body>
-					
+				
+				
 					<form method="POST">
 						{% csrf_token %}
 						<p> Are you sure you want to delete this task? {{budget.description}} </p>
-						<input type="submit" name="Delete"/> 
+						<input type="submit" name="Delete"/>
+
 					</form>
-				</body>
+
+					</div>	
+				</div>		
 				</div>
 			</div>
 		</div>
 	</section>	
+</body>	
 </html>

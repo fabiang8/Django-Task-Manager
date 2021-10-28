@@ -2,9 +2,11 @@
 <html>
 <html lang="en">
 <head>
+	{%load static%}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+	<link rel="stylesheet" href="{% static 'CSS/todo_style.css' %}">
 	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"> </script>
 
            
@@ -25,12 +27,16 @@
 					</div>
 					<div class="col-lg jumbotron text-center">
 						<h1>Budget</h1>
+						<div class="ct-chart ct-perfect-fourth", id="budget_bar"></div>
 						<td><a href="{% url 'budgets' %}" type="button" class="btn btn-primary btn-lrg"> Budget </a></td>
 						</div>
 						<script>
 								new Chartist.Pie('#tasks_pie', {
 									series: [{{ num_list.0.num_comp|safe }},{{ num_list.1.num_comp|safe }}],
 									labels: ['Completed', 'Pending']
+								});
+								new Chartist.Bar('#budget_bar', {
+									series: [{{ damn_lists.0 }},{{ damn_lists.1 }}]
 								});
 
 						</script>

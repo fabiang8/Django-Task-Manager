@@ -7,10 +7,45 @@ from django.contrib.auth import authenticate, login, logout
 #from.views import BudgetList,TaskList
 from django.db.models import Count, Case, When
 from tasks.models import Task
+from budget.models import Budget, BudgetCategory
+from tasks.models import Task, TaskCategory
 from django.template.response import TemplateResponse
+
+run_once = False
+
+def populate_once(request):
+    global run_once
+    if run_once:
+        return
+    if BudgetCategory.objects.all():
+        return    
+
+    BudgetCategory.objects.create(category='Food')
+    BudgetCategory.objects.create(category='Clothing')
+    BudgetCategory.objects.create(category='Housing')
+    BudgetCategory.objects.create(category='Education')
+    BudgetCategory.objects.create(category='Entertainment')
+    BudgetCategory.objects.create(category='other')
+
+    TaskCategory.objects.create(category='Home')
+    TaskCategory.objects.create(category='School')
+    TaskCategory.objects.create(category='Work')
+    TaskCategory.objects.create(category='Self Improvement')
+    TaskCategory.objects.create(category='Other')
+
+    run_once = True
+
 
 @login_required(login_url='/login/')
 def home(request):
+    populate_once(request)
+
+    actuallist =[]
+    projectedlist=[]
+    budget_list = Budget.objects.all().filter(user=request.user)
+    for budget in budget_list:
+        actuallist.append(budget.actual)
+        projectedlist.append(budget.projected)
 
     num_comp = Task.objects.filter(user=request.user).aggregate(num_comp=Count(Case(When(complete=True,then=1))))
     num_fail = Task.objects.filter(user=request.user).aggregate(num_comp=Count(Case(When(complete=False,then=1))))
@@ -18,13 +53,15 @@ def home(request):
     num_list.append(num_comp)
     num_list.append(num_fail)
     context = {
-        "num_list": [num_comp,num_fail]
+        "num_list": [num_comp,num_fail],
+        "damn_lists": [actuallist,projectedlist]
     }
     return render(request, 'index.html', context)
 
 # Create your views here.
 def index(request):
-	return render(request, 'core_temp/index.html')
+    #populate_once(request)
+    return render(request, 'core_temp/index.html')
 
 def join(request):
 	if (request.method == "POST"):
@@ -48,6 +85,7 @@ def join(request):
 		return render(request, 'join.html', page_data)
 
 def user_login(request):
+    #populate_once(request)
     if (request.method == 'POST'):
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
