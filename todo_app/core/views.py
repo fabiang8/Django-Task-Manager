@@ -10,7 +10,8 @@ from tasks.models import Task
 from budget.models import Budget, BudgetCategory
 from tasks.models import Task, TaskCategory
 from django.template.response import TemplateResponse
-
+from .models import UserProfile
+from django.contrib.auth.models import User
 run_once = False
 
 def populate_once(request):
@@ -34,12 +35,14 @@ def populate_once(request):
     TaskCategory.objects.create(category='Other')
 
     run_once = True
-
+def create_userobj():
+    for user in User.objects.all():
+        UserProfile.objects.get_or_create(user=user)
 
 @login_required(login_url='/login/')
 def home(request):
     populate_once(request)
-
+    #create_userobj()
     actuallist =[]
     projectedlist=[]
     budget_list = Budget.objects.all().filter(user=request.user)
@@ -73,6 +76,8 @@ def join(request):
 			user.set_password(user.password)
 			# Save encrypted password to DB
 			user.save()
+            
+            # possibly create UserProfile object
 			# Success! Redirect to home page.
 			return redirect("/")
 		else:

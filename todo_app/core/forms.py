@@ -1,6 +1,7 @@
 from django import forms
 from django.core import validators
 from django.contrib.auth.models import User
+from core.models import UserProfile
 
 class JoinForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
@@ -15,3 +16,4 @@ class JoinForm(forms.ModelForm):
 class LoginForm(forms.Form):
 	username = forms.CharField()
 	password = forms.CharField(widget=forms.PasswordInput())
+

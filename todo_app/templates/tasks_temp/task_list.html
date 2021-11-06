@@ -7,6 +7,7 @@
     {%load static %}
   </head>
   {% include "navigation.html" %}
+  {% load crispy_forms_tags %}
     <section class="vh-100" style="background-color: #eee;">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -19,8 +20,12 @@
               <div class="col-8">
                 <a href="{% url 'task-create' %}" type="button" class="btn btn-primary btn-sm"> Add Task </a>
               </div>
-              <br>
-             
+
+              <div class="col-8">
+                <a class="btn btn-primary btn-sm" type="button" href="{{ instance.set_hide }}"> Hide Complete </a>
+              </div>
+              
+                     
               <table class="table mb-4">
 
                 <thead>
