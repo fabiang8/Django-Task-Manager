@@ -13,9 +13,11 @@ class UserProfile(models.Model):
 			print("test1")
 			self.tasks_view_hide_completed = True
 			self.save()
+			return self.tasks_view_hide_completed
 		else:
 			print("test2")
 			self.tasks_view_hide_completed = False
 			self.save()
-		print("threw")
-		return('/tasks') # returns none b/c cant find object
+			return self.tasks_view_hide_completed
+		#print("threw")
+		#return('') # returns none b/c cant find object

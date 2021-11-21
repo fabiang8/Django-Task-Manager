@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import	path
-from .views import TaskList, TaskDetail, TaskCreate, TaskUpdate, DeleteView, TaskCreateCategory, DeleteCategory
-
+from .views import TaskList, TaskDetail, TaskCreate,UserUpdate, TaskUpdate, DeleteView, TaskCreateCategory, DeleteCategory
+from django.conf.urls import url
 
 
 urlpatterns = [
-	#path('', TaskList.as_view()),
+	#path('tasks', TaskList.as_view(), name="tasks_call"),
+	#(r'^checkbox/$', TaskList.as_view(), name='tasks'),
+	path('tasks/(?P<UserProfile_pk>\d+)/edit/', UserUpdate.as_view(), name='user-update'),
 	path('tasks', TaskList.as_view(), name='tasks'),
 	#path('tasks/set_hide/', set_hide, name='hide'),
 	path('tasks/task_detail/<int:pk>/', TaskDetail.as_view(), name='task'),

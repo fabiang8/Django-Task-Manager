@@ -21,10 +21,9 @@
                 <a href="{% url 'task-create' %}" type="button" class="btn btn-primary btn-sm"> Add Task </a>
               </div>
 
-              <div class="col-8">
-                <a class="btn btn-primary btn-sm" type="button" href="{{ instance.set_hide }}"> Hide Complete </a>
-              </div>
-              
+
+              <a href="{% url 'user-update' UserProfile_pk=user.userprofile.pk %}" type="button" class="btn btn-primary btn-sm"> Hide </a>
+
                      
               <table class="table mb-4">
 
