@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'core',
     'tasks',
     'budget',
-    'crispy_forms',
+    "crispy_forms",
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
