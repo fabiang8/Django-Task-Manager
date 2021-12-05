@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from core.forms import JoinForm
-from core.forms import LoginForm
+from core.forms import LoginForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 #from.views import BudgetList,TaskList
 from django.db.models import Count, Case, When
@@ -67,27 +67,34 @@ def index(request):
     return render(request, 'core_temp/index.html')
 
 def join(request):
-	if (request.method == "POST"):
-		join_form = JoinForm(request.POST)
-		if (join_form.is_valid()):
-			# Save form data to DB
-			user = join_form.save()
-			# Encrypt the password
-			user.set_password(user.password)
-			# Save encrypted password to DB
-			user.save()
-            
+    if (request.method == "POST"):
+        join_form = JoinForm(request.POST)
+        profile_form = UserProfileForm()
+        #print(profile_form)
+        if (join_form.is_valid()):
+            # Save form data to DB
+            user = join_form.save()
+            # Encrypt the password
+            user.set_password(user.password)
+            # Save encrypted password to DB
+            user.save()
+            profile = profile_form.save(commit = False)
+            profile.user = user
+            profile.save()
             # possibly create UserProfile object
 			# Success! Redirect to home page.
-			return redirect("/")
-		else:
-			# Form invalid, print errors to console
-			page_data = { "join_form": join_form }
-			return render(request, 'join.html', page_data)
-	else:
-		join_form = JoinForm()
-		page_data = { "join_form": join_form }
-		return render(request, 'join.html', page_data)
+            return redirect("/")
+        else:
+            print("form invalid fail1")
+            # Form invalid, print errors to console
+            page_data = { "join_form": join_form, "profile_form": profile_form}
+            return render(request, 'join.html', page_data)
+    else:
+        print("form invalid fail")
+        join_form = JoinForm()
+        profile_form = UserProfileForm()
+        page_data = { "join_form": join_form, "profile_form": profile_form}
+        return render(request, 'join.html', page_data)
 
 def user_login(request):
     #populate_once(request)

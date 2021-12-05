@@ -134,7 +134,8 @@ class TaskList(ListView):
 		#value = self.request.GET.get('checkbox')
 		#context['value'] = value
 		cur_user = User.objects.get(id=self.request.user.id)
-		profile = UserProfile.objects.filter(user=cur_user.id).get()
+		if(UserProfile.objects.filter(user=cur_user.id).get()):
+			profile = UserProfile.objects.filter(user=cur_user.id).get()
 		#profile = UserProfile.objects.get(user=cur_user.id)
 		#print(value)
 		'''
