@@ -1,0 +1,13 @@
+<a rel="{% url 'tasks' %}"> </a>	
+<form method="POST">
+	{% csrf_token %}
+	<p> Create Category </p>
+
+	<a href="{% url 'tasks' %}"> Go Back </a>
+	<form method="POST" action="">
+		{% csrf_token %}
+
+		{{form.as_p}}
+		
+	<input type="submit" name="Create"/>
+</form>
