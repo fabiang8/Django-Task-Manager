@@ -1,48 +1,68 @@
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
-	{%load static%}
+	{% load static %}
+	{% include "navigation.html" %}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+	<title>Arrive Transportation</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{% static 'CSS/todo_style.css' %}">
-	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"> </script>
-
-           
-		<title>Document</title>
-		{% include "bootstrap.html" %}
-		{% include "navigation.html" %}
-
 </head>
 <body>
-    <section class="vh-150" style="background-color: #eee;">
-      <div class="container">
-        <div class="row">
-         <div class="col-lg jumbotron text-center">
-					<h1>Tasks</h1>
-				 	<div class="ct-chart ct-perfect-fourth", id="tasks_pie"></div>
-				 	<td><a href="{% url 'tasks' %}" type="button" class="btn btn-primary btn-lrg"> Tasks </a></td>
-          <br>
-					</div>
-					<div class="col-lg jumbotron text-center">
-						<h1>Budget</h1>
-						<div class="ct-chart ct-perfect-fourth", id="budget_bar"></div>
-						<td><a href="{% url 'budgets' %}" type="button" class="btn btn-primary btn-lrg"> Budget </a></td>
-						</div>
-						<script>
-								new Chartist.Pie('#tasks_pie', {
-									series: [{{ num_list.0.num_comp|safe }},{{ num_list.1.num_comp|safe }}],
-									labels: ['Completed', 'Pending']
-								});
-								new Chartist.Bar('#budget_bar', {
-									series: [{{ damn_lists.0 }},{{ damn_lists.1 }}]
-								});
 
-						</script>
+	<div class="container my-5">
+		<h1 class="text-center mb-5">Arrive</h1>
+		<header class="header-section bg-2">
 
-					</div>
-				</div>	
-		</section>					
-	</body>		
-	</html>
+		  <div class="container">
+		    <div class="row">
+		      <div class="col-lg-12">
+		        <div class="transport-services">
+		          <h2>Transportation Services</h2>
+		          <p>At [Company Name], we are committed to providing on-time and reliable transportation services to the New York City/Fairfield County metro area. With over 20 years of experience, our drivers specialize in ensuring that you arrive at your destination safely and on time, whether it's to the airport, a corporate meeting, or any other event.</p>
+
+		          <p>Our mission is to exceed our clients' expectations by providing the highest level of service possible. We understand that time is of the essence, especially when it comes to business travel, and we pride ourselves on our ability to deliver prompt and efficient transportation solutions. Our team of experienced drivers and staff are dedicated to making your travel experience as comfortable and stress-free as possible. Trust us to get you where you need to go, and experience the difference of [Company Name].</p>
+
+		          <a href="{% url 'tasks' %}" class="btn btn-primary btn-lg mt-3">Contact Us</a>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</header>
+		<div class="row">
+			<div class="col-md-6 mb-4">
+				<div class="service-item bg-1 p-4">
+					<img src="{% static 'IMG/travel_site2.jpg' %}" alt="Travel 2" class="img-fluid mb-3">
+					<h3>Transport Services</h3>
+					<p>Our cars are available for hire 24/7, and we guarantee prompt and reliable service to all our clients.</p>
+				</div>
+			</div>
+
+			<div class="col-md-6 mb-4">
+				<div class="service-item bg-3 p-4">
+					<img src="{% static 'IMG/trav_site1.jpg' %}" alt="Travel 1" class="img-fluid mb-3">
+					<h3>Airport Transfers</h3>
+					<p>We provide convenient airport transfer services to and from all major airports.</p>
+				</div>
+			</div>
+			<div class="col-md-6 mb-4">
+				<div class="service-item bg-1 p-4">
+					<img src="{% static 'IMG/black_car.png' %}" alt="Black Car" class="img-fluid mb-3">
+					<h3>Chauffeur Services</h3>
+					<p>Our professional chauffeurs are available to provide you with luxury transportation services for any occasion.</p>
+				</div>
+		    </div>
+
+	</div>
+
+</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+
+	
+
+</html>

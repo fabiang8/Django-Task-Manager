@@ -1,41 +1,70 @@
+<!DOCTYPE html>
 <html>
-		<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
-		{% load static %}
+<head>
+  {% load static %}
+  {% include "navigation.html" %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routes and Pricing</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'CSS/about.css' %}">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="text-black text-center">Vehicles</h1>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-light mr-2" data-toggle="collapse" data-target="#fleet1">Continental Fleet</button>
+        <button class="btn btn-light" data-toggle="collapse" data-target="#fleet2">Suburban Fleet</button>
+      </div>
+      <div class="collapse mt-3" id="fleet1">
+        <hr class="bg-white">
+        <img src="{% static 'IMG/continental_fleet.png' %}" alt="Continental Fleet" class="img-fluid mb-3">
+        <ul class="list-unstyled text-black">
+          <li>Brand: Lincoln</li>
+          <li>Models: Town Car, MKT</li>
+          <li>Passengers: up to 4</li>
+          <li>Luggage: up to 4</li>   
+        </ul>
+      </div>
+      <div class="collapse mt-3" id="fleet2">
+        <hr class="bg-white">
+        <img src="{% static 'IMG/suburban_fleet.png' %}" alt="Suburban Fleet" class="img-fluid mb-3">
+        <ul class="list-unstyled text-black">
+          <li>Brand: Chevrolet</li>
+          <li>Models: Suburban</li>
+          <li>Passengers: up to 6</li>
+          <li>Luggage: up to 6</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1 class="text-black">Service Area</h1>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d614575.3832286395!2d-73.90658959681313!3d41.009304421892246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1684795132743!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 
-		{% include "bootstrap.html" %}
-		{% include "navigation.html" %}
-		<link rel="stylesheet" href="{% static 'CSS/todo_style.css' %}">
-		<div class="container-fluid bg-1 text-center">
-			<h3>About Me</h3>
-       <img src="{% static 'IMG/fabian.jpg' %}"  class="img-circle" alt="Image" width="200px" height="200px">
-		</head>
+<div class="container-fluid bg-light">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-black text-center">Conclusion</h1>
+      <p class="text-black text-center">Thank you for considering our transportation services for your travel needs. We pride ourselves on our commitment to customer satisfaction and safety, and we look forward to the opportunity to provide you with a comfortable and reliable ride.</p>
+      <div class="d-flex justify-content-center">
+        <a href="{% url 'tasks' %}" class="btn btn-primary btn-lg mt-3">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-	<body>	
 
-     </div>
-     <br>
-     <div class="container-fluid bg-2 text-center">
-     	<h3> About Fabian </h3>
-        <h3>
-        	My name is Fabian Garcia, and I am a student at CSU,Chico. I am originally from Stamford Connecticut, but have been living in California for several years. I am a computer science student ,and some of my hobbies include disc golfing, camping, fishing , and riding my motorcycle. 
-        </h3>
-     </div> 
-     <br>  
-    <div class="container-fluid bg-3 text-center">
-    	<h3> Project 1 </h3>
-    	<h3> How it was done / Conclusions </h3>
-        <h3>
-        	I started out by following the "suggested plan of attack". I decided to use django generic views, this was very useful but also complicated a few things. One of the road blocks I ran into was calculating the Budget surplus/deficit. I overcame this by aggregating data from get_context_data object. Overall, chartist.js was easy to implement, once again I just had some trouble passing information in from the view to the template. I did something similar to what I did for Budget surplus/deficit. For my styling, I learned and implemented some bootstrap/css. I learned to use and include django crispy forms, to help style my forms nice. 
-        </h3>
-     </div>        
-	</body>    	
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+
 </html>
-
-
-
-
-
-
